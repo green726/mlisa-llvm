@@ -73,6 +73,7 @@ def sub_gpr_odd  : SubRegIndex<32, 32> {
                                          [SubRegRange<32, 32>, SubRegRange<64, 64>]>;
 }
 
+//mlisa
 //Define 16 M registers for tensor extension
 def ML0: RISCVReg<0, "ml0">;
 def ML1: RISCVReg<1, "ml1">;
@@ -164,6 +165,8 @@ class RISCVRegisterClass<list<ValueType> regTypes, int align, dag regList>
   let TSFlags{6-4} = !sub(NF, 1);
 }
 
+
+//mlisa
 // class TensorVT : ValueType {
 //     let Type = "TensorVT";
 //     let Size = 64; 
@@ -173,6 +176,9 @@ class MlisaRegisterClass<dag regList> : RISCVRegisterClass<[i64], 64, regList> {
 
 //Tensor reg
 def MLR : MlisaRegisterClass<(add  (sequence "ML%u", 0, 15))>;
+
+
+
 
 class GPRRegisterClass<dag regList>
     : RISCVRegisterClass<[XLenVT, XLenFVT, i32], 32, regList> {

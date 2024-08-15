@@ -165,6 +165,7 @@ def OPC_MLLOAD : RISCVOpcode<"MLLD", 0b0000111>;
 def OPC_MLMUL : RISCVOpcode<"MLMUL", 0b0001011>;
 def OPC_MLADD : RISCVOpcode<"MLADD", 0b0001111>;
 def OPC_MLLOG : RISCVOpcode<"MLLOG", 0b0010011>;
+def OPC_MLSOFT : RISCVOpcode<"MLSOFT", 0b1000011>;
 
 
 class RVInstCommon<dag outs, dag ins, string opcodestr, string argstr,

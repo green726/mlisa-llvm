@@ -1600,7 +1600,7 @@ void RISCVDAGToDAGISel::Select(SDNode *Node) {
       // By default we do not custom select any intrinsic.
     default:
       break;
-    //mlisa
+    //mlisa new wo chain operation
     case Intrinsic::tensor_matmul: {
       printf("In RISCVDagToDagISel select tensor matmul\n");
         SDLoc DL(Node);
@@ -1611,6 +1611,16 @@ void RISCVDAGToDAGISel::Select(SDNode *Node) {
         tmmul->dump();
         return;
     } 
+    case Intrinsic::tensor_softmax: {
+      printf("In RISCVDagToDagISel select tensor log\n");
+        SDLoc DL(Node);
+        SDValue Imm = CurDAG->getTargetConstant(0, DL, MVT::i64);
+
+        MachineSDNode *tsoft = CurDAG->getMachineNode(RISCV::MLSOFT, DL, MVT::i64, Node->getOperand(1), Imm);
+        ReplaceUses(SDValue(Node, Node->getNumValues() - 1), SDValue(tsoft, 0));
+        CurDAG->RemoveDeadNode(Node);
+        return;
+    }
     case Intrinsic::tensor_log: {
       printf("In RISCVDagToDagISel select tensor log\n");
         SDLoc DL(Node);
@@ -1828,7 +1838,7 @@ void RISCVDAGToDAGISel::Select(SDNode *Node) {
     default:
       break;
 
-    //mlisa
+    //mlisa new w chain operation
     case Intrinsic::tensor_load: {
         printf("In RISCVDagToDagISel select tensor load\n");
         SDLoc DL(Node);
@@ -2066,7 +2076,7 @@ void RISCVDAGToDAGISel::Select(SDNode *Node) {
   case ISD::INTRINSIC_VOID: {
     unsigned IntNo = Node->getConstantOperandVal(1);
     switch (IntNo) {
-    //mlisa
+    //mlisa new void operation
     case Intrinsic::tensor_store: {
         printf("In RISCVDagToDagISel select tensor store\n");
         SDLoc DL(Node);

@@ -2737,6 +2737,10 @@ def int_tensor_log : Intrinsic<[llvm_token_ty], [llvm_token_ty],
 def int_tensor_relu : Intrinsic<[llvm_token_ty], [llvm_token_ty],
                                         [IntrNoMem, IntrSpeculatable]>;
 
+def int_tensor_softmax: Intrinsic<[llvm_token_ty], [llvm_token_ty],
+                                        [IntrNoMem, IntrSpeculatable]>;
+
+
 def int_tensor_tanh : Intrinsic<[llvm_token_ty], [llvm_token_ty],
                                         [IntrNoMem, IntrSpeculatable]>;
 

@@ -620,12 +620,13 @@ let hasSideEffects = 1, mayLoad = 0, mayStore = 0 in
 def MLMUL : RVInstR<0b0000000, 0b000, OPC_MLMUL, (outs MLR:$rd), (ins MLR:$rs1, MLR:$rs2), "mlmul", "$rd, $rs1, $rs2">;
 
 let hasSideEffects = 1, mayLoad = 0, mayStore = 0 in 
-def MLADD : RVInstR<0b0000000, 0b000, OPC_MLLOG, (outs MLR:$rd), (ins MLR:$rs1, MLR:$rs2), "mladd", "$rd, $rs1, $rs2">;
+def MLADD : RVInstR<0b0000000, 0b000, OPC_MLADD, (outs MLR:$rd), (ins MLR:$rs1, MLR:$rs2), "mladd", "$rd, $rs1, $rs2">;
 
 let hasSideEffects = 1, mayLoad = 0, mayStore = 0 in 
-def MLLOG : RVInstU<OPC_MLADD, (outs MLR:$rd), (ins MLR:$rs1, uimm20:$imm20), "mlmul", "$rd, $rs1, $imm20">;
+def MLLOG : RVInstU<OPC_MLLOG, (outs MLR:$rd), (ins MLR:$rs1, uimm20:$imm20), "mlmul", "$rd, $rs1, $imm20">;
 
-
+let hasSideEffects = 1, mayLoad = 0, mayStore = 0 in 
+def MLSOFT : RVInstU<OPC_MLSOFT, (outs MLR:$rd), (ins MLR:$rs1, uimm20:$imm20), "mlsoft", "$rd, $rs1, $imm20">;
 
 
 
